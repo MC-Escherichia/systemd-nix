@@ -36,8 +36,8 @@
        mkRootService = name: config: 
 	pkgs.writeShellScriptBin "${name}-activate" ''
 	  set -euo pipefail
-	  rm -f -- "/usr/lib/systemd/system/${name}.service"
-	  ln -s ${
+	  sudo rm -f -- "/usr/lib/systemd/system/${name}.service"
+	  sudo ln -s ${
 	    mkService name config 
 	  } "/usr/lib/systemd/user/${name}.service"
 	  sudo systemctl daemon-reload
