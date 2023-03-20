@@ -38,7 +38,7 @@
 	  set -euo pipefail
 	  rm -f -- "/usr/lib/systemd/system/${name}.service"
 	  ln -s ${
-	    mkService name (config // {inherit user;});
+	    mkService name (config // {inherit user;})
 	  } "/usr/lib/systemd/user/${name}.service"
 	  sudo systemctl daemon-reload
 	  sudo systemctl enable ${name}
