@@ -20,7 +20,9 @@
         pkgs.writeShellScriptBin "activate" ''
           set -euo pipefail
           export XDG_RUNTIME_DIR="/run/user/$UID"
-          loginctl enable-linger "$USER"
+	  if [ ! -f "/var/lib/systemd/linger/$USER" ]; then
+		  loginctl enable-linger "$USER"
+	  fi
           mkdir -p "$HOME/.config/systemd/user" "$HOME/.config/systemd/user/default.target.wants"
           rm -f -- "$HOME/.config/systemd/user/${name}.service" "$HOME/.config/systemd/user/default.target.wants/${name}.service"
           ln -s ${
